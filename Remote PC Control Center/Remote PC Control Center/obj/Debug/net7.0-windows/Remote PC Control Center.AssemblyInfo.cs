@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Remote PC Control Center")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8946919a9f16e359168d5b9228c69387b090f7f0")]
 [assembly: System.Reflection.AssemblyProductAttribute("Remote PC Control Center")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Remote PC Control Center")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

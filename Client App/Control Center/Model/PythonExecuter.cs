@@ -27,13 +27,13 @@ namespace Control_Center.Model
             }
         }
 
-        private void run_cmd2()
+        private Process run_script()
         {
 
-            string fileName = @"C:\sample_script.py";
+            string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\model\Client.py";
 
             Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(@"C:\Python27\python.exe", fileName)
+            p.StartInfo = new ProcessStartInfo(filePath)
             {
                 RedirectStandardOutput = true,
                 UseShellExecute = false,
@@ -44,10 +44,12 @@ namespace Control_Center.Model
             string output = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
 
-            Console.WriteLine(output);
+            return p;
+        }
 
-            Console.ReadLine();
-
+        public void kill_script(Process p)
+        {
+            p.Kill();
         }
     }
 }

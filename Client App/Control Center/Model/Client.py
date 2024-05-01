@@ -21,9 +21,7 @@ def process_message():
         script_url = url + script_name
         download_script(script_url, save_path)
         if (successful):
-            with open(save_path, 'r') as f:
-                script = f.read()
-                subprocess.run(['python', save_path])
+            subprocess.run(['python', save_path])
             return 200
         else:
             return {'error': 'Script not found'}, 400

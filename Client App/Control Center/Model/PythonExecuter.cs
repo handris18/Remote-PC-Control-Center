@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Control_Center.Model
 {
-    internal class PythonExecuter
+    public class PythonExecuter
     {
+        Process p;
+
         private void run_cmd(string cmd, string args)
         {
             ProcessStartInfo start = new ProcessStartInfo();
@@ -27,29 +26,41 @@ namespace Control_Center.Model
             }
         }
 
-        private Process run_script()
+        public void run_script()
         {
+            string filePath = AppDomain.CurrentDomain.BaseDirectory;
+            filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
+            Directory.SetCurrentDirectory(filePath);
 
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\model\Client.py";
-
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(filePath)
+            p = new Process();
+            p.StartInfo = new ProcessStartInfo("CMD.exe")
             {
+                //Arguments = "py model\\Client.py",
                 RedirectStandardOutput = true,
+                RedirectStandardInput = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = false
             };
             p.Start();
 
-            string output = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
-
-            return p;
+            p.StandardInput.WriteLine("py model\\Client.py");
         }
 
-        public void kill_script(Process p)
+        public void kill_script()
         {
-            p.Kill();
+            try {
+                if (p != null)
+                {
+                    p.Kill();
+                    foreach (var server in Process.GetProcessesByName("python"))
+                    {
+                        server.Kill();
+                    }
+                    p.Close();
+                }
+            } 
+            catch {
+            }
         }
     }
 }

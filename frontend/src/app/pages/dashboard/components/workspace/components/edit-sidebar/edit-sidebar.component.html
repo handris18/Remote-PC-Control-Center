@@ -1,0 +1,18 @@
+<div class="offcanvas-header">
+  <h5 class="offcanvas-title">Edit script</h5>
+  <button
+    type="button"
+    class="btn-close text-reset"
+    aria-label="Close"
+    (click)="activeOffcanvas.dismiss('Cross click')"
+  ></button>
+</div>
+<div class="offcanvas-body">
+  @if (scriptButton) {
+    <div>Name: {{ scriptButton.name }}</div>
+  } @else {
+    <div>Name unknown</div>
+  }
+  <textarea [ngModel]="scriptText"></textarea>
+  <button (click)="saveScript()">Save text</button>
+</div>

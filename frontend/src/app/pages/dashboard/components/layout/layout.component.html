@@ -1,0 +1,11 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <div class="navbar-brand">EasyAccess</div>
+      <button class="btn btn-outline-success me-2" type="button"
+        (click)="onScriptButtonAdd()">Add Script Button</button>
+      <div class="d-flex">
+        <span class="text-white">{{loggedUser?.email}} </span> 
+        <button class="btn btn-primary" type="button" (click)="onLogoff()">Logout</button>
+      </div>
+    </div>
+  </nav>

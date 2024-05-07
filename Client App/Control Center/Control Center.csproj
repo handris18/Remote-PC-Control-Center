@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Persistence\" />
     <Folder Include="View\" />
     <Folder Include="Persistence\" />
   </ItemGroup>

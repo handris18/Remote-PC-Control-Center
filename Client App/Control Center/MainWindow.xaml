@@ -9,7 +9,7 @@
     <Grid>
         <Menu Height="30" VerticalAlignment="Top">
             <MenuItem Header="Actions" Height="30">
-                <MenuItem Header="Register device"></MenuItem>
+                <MenuItem Header="Register device" Click="Register_Click"></MenuItem>
                 <MenuItem Header="Delete registration"></MenuItem>
                 <MenuItem Header="Connect" Click="Connect_Click"></MenuItem>
                 <MenuItem Header="Disconnect" Click="Disconnect_Click"></MenuItem>

@@ -1,0 +1,9 @@
+<div class="container">
+  @for (item of buttons$ | async; track $index) {
+    <app-script-button
+      [scriptButtonData]="item"
+      (editScriptEvent)="openSidebar($event)"
+      (launchScriptEvent)="launchScript($event)">
+    </app-script-button>
+  }
+</div>

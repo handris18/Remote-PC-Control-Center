@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
 import { DndModule } from '@ng-dnd/core';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,7 +16,13 @@ import { LayoutComponent } from './pages/dashboard/components/layout/layout.comp
 import { WorkspaceComponent } from './pages/dashboard/components/workspace/workspace.component';
 import { ScriptButtonComponent } from './pages/dashboard/components/workspace/components/script-button/script-button.component';
 import { EditSidebarComponent } from './pages/dashboard/components/workspace/components/edit-sidebar/edit-sidebar.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+import { API_HOST } from './constants/const';
+
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 @NgModule({
   declarations: [
@@ -31,6 +39,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [API_HOST],
+      },
+    }),
     DndModule.forRoot({ backend: HTML5Backend }),
     NgbModule,
   ],

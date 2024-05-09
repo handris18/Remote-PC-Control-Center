@@ -21,6 +21,7 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.buttons$ = this.workspaceService.getButtonsAsObservable();
+    this.workspaceService.fetchButtons();
   }
 
   openSidebar(scriptButton: ScriptButton) {

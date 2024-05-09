@@ -17,7 +17,7 @@ export class LayoutComponent {
   ) {
     const localUser = localStorage.getItem('loggedUser');
     if (localUser != null) {
-      this.loggedUser = JSON.parse(localUser);
+      this.loggedUser = localUser;
     }
   }
 

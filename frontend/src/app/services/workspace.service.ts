@@ -4,6 +4,7 @@ import { cloneDeep } from 'lodash';
 
 import { APIService } from './api.service';
 import { ScriptButton } from '../interfaces/script-button.interface';
+import { DEFAULT_SCRIPT_NAME } from '../constants/const';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,24 @@ export class WorkspaceService {
   constructor(private apiService: APIService) { }
 
   addButton(): void {
-    let id: number = this.buttonsInner.length == 0 ? 
-      0 : Number.parseInt(this.buttonsInner[this.buttonsInner.length - 1].id) + 1;
-    
-    this.buttonsInner.push({ id: id.toString(), name: `Funny Name #${id}` });
-    this.buttons$.next(cloneDeep(this.buttonsInner));
+    this.apiService.createScript().subscribe(
+      response => {
+        const {message, script_id} = response;
+        if (script_id != -1) {
+          this.buttonsInner.push({ id: script_id.toString(), name: DEFAULT_SCRIPT_NAME });
+          this.buttons$.next(cloneDeep(this.buttonsInner));
+        }
+      }
+    )
+  }
+
+  fetchButtons() {
+    this.apiService.fetchAllScripts().subscribe(
+      buttonList => {
+        this.buttonsInner = buttonList;
+        this.buttons$.next(cloneDeep(this.buttonsInner));
+      }
+    );
   }
 
   getButtonsAsObservable(): Observable<ScriptButton[]> {

@@ -25,5 +25,11 @@ services:
     depends_on:
       - mysql
 
+  # web-app:
+  #   build:
+  #     context: frontend
+  #   restart: always
+
+
 volumes:
   mysql_db:

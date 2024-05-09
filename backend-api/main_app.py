@@ -144,9 +144,6 @@ def edit_script(script_id):
 
     return jsonify({'message': 'Script updated successfully'}), 200
 
-
-
-
 # fetch the scripts
 @app.route('/scripts/fetch', methods=['GET'])
 @jwt_required()
@@ -154,7 +151,7 @@ def fetch_scripts():
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_id , script_name , content FROM scripts WHERE user_id = %s", (current_user,))
+    cur.execute("SELECT script_id , script_name FROM scripts WHERE user_id = %s", (current_user,))
     scripts = cur.fetchall()
     cur.close()
 

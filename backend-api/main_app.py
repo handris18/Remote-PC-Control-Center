@@ -98,7 +98,7 @@ def create_script():
     content = data.get('content')
     user_id = get_jwt_identity()
 
-    if not script_name or not content:
+    if not script_name or content == None:
         return jsonify({'error': 'Script name and content are required'}), 400
 
     cur = mysql.connection.cursor()

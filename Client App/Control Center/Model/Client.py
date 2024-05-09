@@ -23,7 +23,7 @@ app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
 jwt = JWTManager(app)
 
 save_path = os.path.dirname(os.path.abspath(__file__)) + 'Script.py'
-url = 'http://example.com/'
+url = 'localhost:5000'
 successful = False
 script_name = ''
 UID = ''
@@ -73,5 +73,5 @@ def handle_message(message):
 
 if __name__ == '__main__':
     #app.run(debug=True)
-    socketio.run(app, host='0.0.0.0', port=5000)
+    socketio.run(app, host='0.0.0.0', port=1080)
     sio.connect(url)

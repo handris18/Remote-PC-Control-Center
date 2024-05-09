@@ -45,7 +45,7 @@ namespace Control_Center
                         device_number = File.ReadAllText("Persistence/UID.txt"),
                         password = in_password
                     };
-                    var url = "http://example.com/register";
+                    var url = "localhost:5000/register";
                     server_comm.Send_to_Server(data, url);
                     
                     if (server_comm.success)
@@ -87,7 +87,7 @@ namespace Control_Center
                         device_number = File.ReadAllText("Persistence/UID.txt"),
                         password = in_password
                     };
-                    var url = "http://example.com/login";
+                    var url = "localhost:5000/login";
                     server_comm.Send_to_Server(data, url);
 
                     if (server_comm.success)

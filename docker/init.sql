@@ -29,3 +29,8 @@ CREATE TABLE IF NOT EXISTS websockets (
   `endpoint` varchar(50) NOT NULL,
   PRIMARY KEY (`connection_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `users` (`user_id`, `device_number`, `password`)
+  VALUES (1, 'user1', 'hellopass')
+  ON DUPLICATE KEY UPDATE `user_id`=`user_id`;

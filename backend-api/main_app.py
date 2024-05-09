@@ -3,6 +3,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from flask_mysqldb import MySQL
 from datetime import datetime
 import json
@@ -11,11 +12,12 @@ from io import StringIO
 
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'localhost'
+CORS(app)
+app.config['MYSQL_HOST'] = 'mysql'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'remote_pc_controller'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'easy_access'
 app.config['JWT_SECRET_KEY'] = 'Aminebk2001'  
 app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
@@ -31,6 +33,7 @@ class User:
 
 # Token blacklist (this could be a database table)
 blacklisted_tokens = set()
+
 # Route to get all the users data from the database
 @app.route('/data', methods=['GET'])
 def get_data():

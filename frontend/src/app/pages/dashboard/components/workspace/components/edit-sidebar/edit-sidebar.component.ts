@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, ChangeDetectorRef } from '@
 import { Subject, takeUntil } from 'rxjs';
 import { NgbActiveOffcanvas } from '@ng-bootstrap/ng-bootstrap';
 
-import { ScriptButton } from '../../../../../../interfaces/script-button.interface';
+import { ScriptButton, ScriptObject } from '../../../../../../interfaces/script-button.interface';
 import { SidebarService } from '../../../../../../services/sidebar.service';
 
 @Component({
@@ -44,7 +44,9 @@ export class EditSidebarComponent {
   }
 
   saveScript(): void {
-    alert('The script was saved!');
-    this.activeOffcanvas.close();
+    let scriptObj: ScriptObject = { ...this.scriptButton, content: this.scriptText };
+    this.sidebarService.saveScript(scriptObj).subscribe(
+      _ => this.activeOffcanvas.close()
+    );
   }
 }

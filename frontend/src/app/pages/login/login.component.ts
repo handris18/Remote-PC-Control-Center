@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { APIService } from '../../services/api.service';
+import { LoginModel } from '../../interfaces/api-interfaces.interface';
 
 @Component({
   selector: 'app-login',
@@ -9,29 +12,38 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  loginObj: LoginModel  = new LoginModel();
+  loginObj: LoginFormModel  = new LoginFormModel();
+  loggingIn: boolean = false;
 
-  constructor(private router: Router) {};
+  constructor(
+    private router: Router,
+    private apiService: APIService,
+    private changeDetectorRef: ChangeDetectorRef
+  ) {};
 
   onLogin() {
-    console.log('im here');
-  //   const localUsers =  localStorage.getItem('angular17users');
-  //   if(localUsers != null) {
-  //     const users =  JSON.parse(localUsers);
+    const loginModelObj: LoginModel = {
+      device_number: this.loginObj.deviceId,
+      password: this.loginObj.password
+    };
 
-  //     const isUserPresent =  users.find( (user:SignUpModel)=> user.email == this.loginObj.email && user.password == this.loginObj.password);
-  //     if(isUserPresent != undefined) {
-  //       alert("User Found...");
-  //       localStorage.setItem('loggedUser', JSON.stringify(isUserPresent));
-        this.router.navigateByUrl('/dashboard');
-  //     } else {
-  //       alert("No User Found")
-  //     }
-  //   }
+    if (loginModelObj.device_number != "" && loginModelObj.password != "") {
+      this.loggingIn = true;
+      this.apiService.login(loginModelObj)
+        .subscribe(({message, access_token}) => {
+          if (message != 'Login failed') {
+            localStorage.setItem('access_token', access_token);
+            this.router.navigateByUrl('/dashboard');
+          }
+
+          this.loggingIn = false;
+          this.changeDetectorRef.detectChanges();
+        });
+    };
   }
 }
 
-export class LoginModel  { 
+class LoginFormModel  { 
   deviceId: string;
   password: string;
 

@@ -3,6 +3,7 @@ from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
+from flask_cors import CORS
 from flask_mysqldb import MySQL
 from datetime import datetime
 import json
@@ -11,11 +12,12 @@ from io import StringIO
 
 
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = 'localhost'
+CORS(app)
+app.config['MYSQL_HOST'] = 'mysql'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'remote_pc_controller'
+app.config['MYSQL_PASSWORD'] = 'password'
+app.config['MYSQL_DB'] = 'easy_access'
 app.config['JWT_SECRET_KEY'] = 'Aminebk2001'  
 app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
@@ -31,6 +33,11 @@ class User:
 
 # Token blacklist (this could be a database table)
 blacklisted_tokens = set()
+
+@app.route('/', methods=['GET'])
+def hello():
+    return "Hello from Flask!"
+
 # Route to get all the users data from the database
 @app.route('/data', methods=['GET'])
 def get_data():
@@ -95,16 +102,51 @@ def create_script():
     content = data.get('content')
     user_id = get_jwt_identity()
 
-    if not script_name or not content:
+    if not script_name or content == None:
         return jsonify({'error': 'Script name and content are required'}), 400
 
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO scripts (user_id, script_name, content,date_created) VALUES (%s, %s, %s, NOW())", (user_id, script_name, content))
+
+    # Get the last inserted script_id
+    cur.execute("SELECT LAST_INSERT_ID()")
+    script_id = cur.fetchone()[0]
+
     mysql.connection.commit()
     cur.close()
     
-    return jsonify({'message': 'Script created successfully'}), 201
+    return jsonify({'message': f'Script {script_id} created successfully', 'script_id': script_id}), 201
 
+# Endpoint to edit a specific coding script by ID
+@app.route('/scripts/<int:script_id>/update', methods=['PUT'])
+@jwt_required()
+def edit_script(script_id):
+    current_user = get_jwt_identity()
+    data = request.json
+    new_script_name = data.get('script_name')
+    new_content = data.get('content')
+
+    if not new_script_name and not new_content:
+        return jsonify({'error': 'Script name or content is required for editing'}), 400
+
+    cur = mysql.connection.cursor()
+    # Check if the script exists and belongs to the current user
+    cur.execute("SELECT user_id FROM scripts WHERE script_id = %s", (script_id,))
+    result = cur.fetchone()
+    if not result:
+        return jsonify({'error': 'Script not found'}), 404
+    if result[0] != current_user:
+        return jsonify({'error': 'You are not authorized to edit this script'}), 403
+
+    # Update script_name and/or content in the database
+    if new_script_name:
+        cur.execute("UPDATE scripts SET script_name = %s WHERE script_id = %s", (new_script_name, script_id))
+    if new_content:
+        cur.execute("UPDATE scripts SET content = %s WHERE script_id = %s", (new_content, script_id))
+    mysql.connection.commit()
+    cur.close()
+
+    return jsonify({'message': 'Script updated successfully'}), 200
 
 # fetch the scripts
 @app.route('/scripts/fetch', methods=['GET'])
@@ -113,7 +155,7 @@ def fetch_scripts():
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content FROM scripts WHERE user_id = %s", (current_user,))
+    cur.execute("SELECT script_id , script_name FROM scripts WHERE user_id = %s", (current_user,))
     scripts = cur.fetchall()
     cur.close()
 
@@ -130,7 +172,7 @@ def fetch_script(script_id):
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
+    cur.execute("SELECT script_id , script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
     script = cur.fetchone()
     cur.close()
 

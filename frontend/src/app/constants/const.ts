@@ -1,5 +1,5 @@
-export const API_HOST = 'localhost:5000';
-export const API_URL = 'http://' + API_HOST;
+export const API_HOST = 'localhost:4200';
+export const API_URL = 'http://' + API_HOST + '/api';
 
 export const API_ENDPOINTS = {
     login: API_URL + '/login',

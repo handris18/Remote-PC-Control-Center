@@ -4,8 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
-import { DndModule } from '@ng-dnd/core';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -45,7 +43,6 @@ export function tokenGetter() {
         allowedDomains: [API_HOST],
       },
     }),
-    DndModule.forRoot({ backend: HTML5Backend }),
     NgbModule,
   ],
   providers: [],

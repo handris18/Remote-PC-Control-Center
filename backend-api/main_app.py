@@ -34,6 +34,10 @@ class User:
 # Token blacklist (this could be a database table)
 blacklisted_tokens = set()
 
+@app.route('/', methods=['GET'])
+def hello():
+    return "Hello from Flask!"
+
 # Route to get all the users data from the database
 @app.route('/data', methods=['GET'])
 def get_data():

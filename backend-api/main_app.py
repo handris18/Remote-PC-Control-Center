@@ -103,10 +103,15 @@ def create_script():
 
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO scripts (user_id, script_name, content,date_created) VALUES (%s, %s, %s, NOW())", (user_id, script_name, content))
+
+    # Get the last inserted script_id
+    cur.execute("SELECT LAST_INSERT_ID()")
+    script_id = cur.fetchone()[0]
+
     mysql.connection.commit()
     cur.close()
     
-    return jsonify({'message': 'Script created successfully'}), 201
+    return jsonify({'message': f'Script {script_id} created successfully', 'script_id': script_id}), 201
 
 
 # fetch the scripts
@@ -116,7 +121,7 @@ def fetch_scripts():
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content FROM scripts WHERE user_id = %s", (current_user,))
+    cur.execute("SELECT script_id , script_name , content FROM scripts WHERE user_id = %s", (current_user,))
     scripts = cur.fetchall()
     cur.close()
 
@@ -133,7 +138,7 @@ def fetch_script(script_id):
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
+    cur.execute("SELECT script_id , script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
     script = cur.fetchone()
     cur.close()
 

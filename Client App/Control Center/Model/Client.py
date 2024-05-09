@@ -7,8 +7,11 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import sys
 from pathlib import Path
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+socketio = SocketIO(app)
+sio = socketio.Client()
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_PORT'] = 1080
 app.config['MYSQL_USER'] = 'root'
@@ -56,15 +59,19 @@ def download_script(url, save_path):
     else:
         successful = False
 
+@socketio.on('run_script')
+def handle_message(message):
+    if 'run script' == message['action']:
+        script_name = message['script_id']
+        script_url = url + 'scripts/' + script_id
+        download_script(script_url, save_path)
+        if (successful):
+            subprocess.run(['python', save_path])
+            return 200
+        else:
+            return {'error': 'Script not found'}, 400
+
 if __name__ == '__main__':
-    main_path = os.path.dirname(__file__)
-    path = os.path.join(main_path, '..\\Persistence\\UID.txt')
-    with open(path, 'r') as f:
-        UID = f.read()
-    password = sys.argv[1]
-    login = {UID:password}
-    '''res = requests.post(url + '/login', json=login)
-    if res.status_code == 200:
-        app.run(debug=True)'''
-    if password != '':
-        app.run(debug=True)
+    #app.run(debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000)
+    sio.connect(url)

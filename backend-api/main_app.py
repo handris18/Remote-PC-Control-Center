@@ -113,6 +113,39 @@ def create_script():
     
     return jsonify({'message': f'Script {script_id} created successfully', 'script_id': script_id}), 201
 
+# Endpoint to edit a specific coding script by ID
+@app.route('/scripts/<int:script_id>/update', methods=['PUT'])
+@jwt_required()
+def edit_script(script_id):
+    current_user = get_jwt_identity()
+    data = request.json
+    new_script_name = data.get('script_name')
+    new_content = data.get('content')
+
+    if not new_script_name and not new_content:
+        return jsonify({'error': 'Script name or content is required for editing'}), 400
+
+    cur = mysql.connection.cursor()
+    # Check if the script exists and belongs to the current user
+    cur.execute("SELECT user_id FROM scripts WHERE script_id = %s", (script_id,))
+    result = cur.fetchone()
+    if not result:
+        return jsonify({'error': 'Script not found'}), 404
+    if result[0] != current_user:
+        return jsonify({'error': 'You are not authorized to edit this script'}), 403
+
+    # Update script_name and/or content in the database
+    if new_script_name:
+        cur.execute("UPDATE scripts SET script_name = %s WHERE script_id = %s", (new_script_name, script_id))
+    if new_content:
+        cur.execute("UPDATE scripts SET content = %s WHERE script_id = %s", (new_content, script_id))
+    mysql.connection.commit()
+    cur.close()
+
+    return jsonify({'message': 'Script updated successfully'}), 200
+
+
+
 
 # fetch the scripts
 @app.route('/scripts/fetch', methods=['GET'])

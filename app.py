@@ -100,10 +100,45 @@ def create_script():
 
     cur = mysql.connection.cursor()
     cur.execute("INSERT INTO scripts (user_id, script_name, content,date_created) VALUES (%s, %s, %s, NOW())", (user_id, script_name, content))
+    cur.execute("SELECT LAST_INSERT_ID()")
+    script_id = cur.fetchone()[0]
+
     mysql.connection.commit()
     cur.close()
     
-    return jsonify({'message': 'Script created successfully'}), 201
+    return jsonify({'message': f'Script {script_id} created successfully', 'script_id': script_id}), 201
+
+# Endpoint to edit a specific coding script by ID
+@app.route('/scripts/<int:script_id>/update', methods=['PUT'])
+@jwt_required()
+def edit_script(script_id):
+    current_user = get_jwt_identity()
+    data = request.json
+    new_script_name = data.get('script_name')
+    new_content = data.get('content')
+
+    if not new_script_name and not new_content:
+        return jsonify({'error': 'Script name or content is required for editing'}), 400
+
+    cur = mysql.connection.cursor()
+    # Check if the script exists and belongs to the current user
+    cur.execute("SELECT user_id FROM scripts WHERE script_id = %s", (script_id,))
+    result = cur.fetchone()
+    if not result:
+        return jsonify({'error': 'Script not found'}), 404
+    if result[0] != current_user:
+        return jsonify({'error': 'You are not authorized to edit this script'}), 403
+
+    # Update script_name and/or content in the database
+    if new_script_name:
+        cur.execute("UPDATE scripts SET script_name = %s WHERE script_id = %s", (new_script_name, script_id))
+    if new_content:
+        cur.execute("UPDATE scripts SET content = %s WHERE script_id = %s", (new_content, script_id))
+    mysql.connection.commit()
+    cur.close()
+
+    return jsonify({'message': 'Script updated successfully'}), 200
+
 
 
 # fetch the scripts
@@ -113,7 +148,7 @@ def fetch_scripts():
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content FROM scripts WHERE user_id = %s", (current_user,))
+    cur.execute("SELECT script_id , script_name , content FROM scripts WHERE user_id = %s", (current_user,))
     scripts = cur.fetchall()
     cur.close()
 
@@ -130,7 +165,7 @@ def fetch_script(script_id):
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
+    cur.execute("SELECT script_id ,script_name , content  FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
     script = cur.fetchone()
     cur.close()
 

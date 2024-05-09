@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "dcBbjT9w+puocSQN87x6Ijf1HDXp3Y2KWC956xn1g8upfhYPnTEvskMzeFkk9wT9yp1LOAmdqy+9gAVEwYugHA==",
+  "dgSpecHash": "eK1BfC28Gb4bQDlhBfYfx9T+b2lOEh5gj3xwhKYgolqPj96Tw81d5rmyItwSglzYd2eOWZWOe1ka9+N4dYT5XQ==",
   "success": true,
   "projectFilePath": "D:\\cuccok\\egyetemmegstb\\2023_24_2\\Haladó szofttech\\Client App\\Control Center\\Control Center.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Andris\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -10,8 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Persistence\" />
     <Folder Include="View\" />
     <Folder Include="Persistence\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>
 
 </Project>

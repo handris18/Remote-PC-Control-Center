@@ -1,13 +1,37 @@
 from flask import Flask
 import os
 import subprocess
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
+from flask_jwt_extended import JWTManager
+import sys
+from pathlib import Path
+from flask_socketio import SocketIO
 
 app = Flask(__name__)
+socketio = SocketIO(app)
+sio = socketio.Client()
+app.config['MYSQL_HOST'] = 'localhost'
+app.config['MYSQL_PORT'] = 1080
+app.config['MYSQL_USER'] = 'root'
+app.config['MYSQL_PASSWORD'] = ''
+app.config['MYSQL_DB'] = 'remote_pc_controller'
+app.config['JWT_SECRET_KEY'] = 'Client'  
+app.config['JWT_BLACKLIST_ENABLED'] = True
+app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
+jwt = JWTManager(app)
 
 save_path = os.path.dirname(os.path.abspath(__file__)) + 'Script.py'
 url = 'http://example.com/'
 successful = False
 script_name = ''
+UID = ''
+password = ''
+
+#websocket client
+#jwt authentication
+#generate unique UIDs
 
 @app.route('/')
 def Is_Online():
@@ -17,13 +41,11 @@ def Is_Online():
 def process_message():
     data = request.json
     if 'run script' == data['action']:
-        script_name = data['script_name']
-        script_url = url + script_name
+        script_name = data['script_id']
+        script_url = url + 'scripts/' + script_id
         download_script(script_url, save_path)
         if (successful):
-            with open(save_path, 'r') as f:
-                script = f.read()
-                subprocess.run(['python', save_path])
+            subprocess.run(['python', save_path])
             return 200
         else:
             return {'error': 'Script not found'}, 400
@@ -37,5 +59,19 @@ def download_script(url, save_path):
     else:
         successful = False
 
+@socketio.on('run_script')
+def handle_message(message):
+    if 'run script' == message['action']:
+        script_name = message['script_id']
+        script_url = url + 'scripts/' + script_id
+        download_script(script_url, save_path)
+        if (successful):
+            subprocess.run(['python', save_path])
+            return 200
+        else:
+            return {'error': 'Script not found'}, 400
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    #app.run(debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000)
+    sio.connect(url)

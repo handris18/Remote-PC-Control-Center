@@ -24,11 +24,11 @@ namespace Control_Center
 
         private void Register_Click(object sender, RoutedEventArgs e)
         {
-            var loginWindow = new LoginWindow();
-            if (loginWindow.ShowDialog() == true)
+            var registerWindow = new RegisterWindow();
+            if (registerWindow.ShowDialog() == true)
             {
-                string in_username = loginWindow.Username;
-                string in_password = loginWindow.Password;
+                string in_username = registerWindow.Username;
+                string in_password = registerWindow.Password;
                 if (in_password != "" && in_username != "")
                 {
                     string filePath = AppDomain.CurrentDomain.BaseDirectory;
@@ -45,7 +45,7 @@ namespace Control_Center
                         device_number = File.ReadAllText("Persistence/UID.txt"),
                         password = in_password
                     };
-                    var url = "localhost:5000/register";
+                    var url = "http://localhost:5000/register";
                     server_comm.Send_to_Server(data, url);
                     
                     if (server_comm.success)
@@ -87,7 +87,7 @@ namespace Control_Center
                         device_number = File.ReadAllText("Persistence/UID.txt"),
                         password = in_password
                     };
-                    var url = "localhost:5000/login";
+                    var url = "http://localhost:5000/login";
                     server_comm.Send_to_Server(data, url);
 
                     if (server_comm.success)

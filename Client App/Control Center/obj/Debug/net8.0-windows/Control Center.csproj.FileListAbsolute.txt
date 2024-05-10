@@ -40,3 +40,6 @@ D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\ob
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.pdb
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.genruntimeconfig.cache
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\ref\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.AssemblyReference.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control .04D9929E.Up2Date

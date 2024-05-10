@@ -33,10 +33,14 @@ namespace Control_Center.Model
                 RowDefinition rowDef2 = new RowDefinition();
                 RowDefinition rowDef3 = new RowDefinition();
                 RowDefinition rowDef4 = new RowDefinition();
+                RowDefinition rowDef5 = new RowDefinition();
+                RowDefinition rowDef6 = new RowDefinition();
                 grid.RowDefinitions.Add(rowDef1);
                 grid.RowDefinitions.Add(rowDef2);
                 grid.RowDefinitions.Add(rowDef3);
                 grid.RowDefinitions.Add(rowDef4);
+                grid.RowDefinitions.Add(rowDef5);
+                grid.RowDefinitions.Add(rowDef6);
 
                 TextBlock lblUsername = new TextBlock();
                 lblUsername.Text = "Username:";
@@ -104,6 +108,7 @@ namespace Control_Center.Model
 
             private void InitializeComponents()
             {
+
                 Title = "Register";
                 Width = 300;
                 Height = 200;
@@ -115,10 +120,14 @@ namespace Control_Center.Model
                 RowDefinition rowDef2 = new RowDefinition();
                 RowDefinition rowDef3 = new RowDefinition();
                 RowDefinition rowDef4 = new RowDefinition();
+                RowDefinition rowDef5 = new RowDefinition();
+                RowDefinition rowDef6 = new RowDefinition();
                 grid.RowDefinitions.Add(rowDef1);
                 grid.RowDefinitions.Add(rowDef2);
                 grid.RowDefinitions.Add(rowDef3);
                 grid.RowDefinitions.Add(rowDef4);
+                grid.RowDefinitions.Add(rowDef5);
+                grid.RowDefinitions.Add(rowDef6);
 
                 TextBlock lblUsername = new TextBlock();
                 lblUsername.Text = "Username:";

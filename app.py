@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify,render_template
 from flask_jwt_extended import create_access_token
 from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
@@ -8,9 +8,12 @@ from datetime import datetime
 import json
 import sys
 from io import StringIO
+from flask_socketio import SocketIO
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Aminebk2001'
+socketio = SocketIO(app)
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_PORT'] = 3306
 app.config['MYSQL_USER'] = 'root'
@@ -21,6 +24,12 @@ app.config['JWT_BLACKLIST_ENABLED'] = True
 app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
 jwt = JWTManager(app)
 mysql = MySQL(app)
+
+
+# Route to serve the test.html file
+@app.route('/test')
+def serve_test_html():
+    return render_template('test.html')
 
 class User:
     def __init__(self, user_id, email, password):
@@ -211,4 +220,6 @@ def execute_script(script_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    print('Starting server...')
+    socketio.run(app, host='0.0.0.0', port=5000)
+

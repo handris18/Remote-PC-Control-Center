@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.3.2/socket.io.js"></script>
+</head>
+<body>
+    <h1>WebSocket Test</h1>
+    <script>
+        // Connect to the WebSocket server
+        const socket = io('ws://localhost:5000');
+
+        // Event handler for successful connection
+        socket.on('connect', () => {
+            console.log('Connected to WebSocket server');
+        });
+
+        // Event handler for receiving server messages
+        socket.on('server_message', (data) => {
+            console.log('Received message from server:', data.message);
+        });
+    </script>
+</body>
+</html>

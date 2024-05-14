@@ -11,6 +11,10 @@ import sys
 from io import StringIO
 
 
+DEFAULT_SCRIPT_FILL = '''
+print('Hello, World!')
+'''
+
 app = Flask(__name__)
 CORS(app)
 app.config['MYSQL_HOST'] = 'mysql'
@@ -99,7 +103,9 @@ def login():
 def create_script():
     data = request.json
     script_name = data.get('script_name')
-    content = data.get('content')
+    content = data.get('content', DEFAULT_SCRIPT_FILL)
+    if (content == ''):
+        content = DEFAULT_SCRIPT_FILL
     user_id = get_jwt_identity()
 
     if not script_name or content == None:
@@ -207,15 +213,13 @@ def execute_script(script_id):
             sys.stderr = sys.__stderr__
             # Check if there was any error during execution
             if error:
-                return jsonify({'error': error}), 500
+                return jsonify({'message': error}), 500
             else:
-                return jsonify({'output': output}), 200
+                return jsonify({'message': output}), 200
         except Exception as e:
-            return jsonify({'error': f'Error executing script: {str(e)}'}), 500
+            return jsonify({'message': f'Error executing script: {str(e)}'}), 500
     else:
-        return jsonify({'error': 'Script not found'}), 404
-
-
+        return jsonify({'message': 'Script not found'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

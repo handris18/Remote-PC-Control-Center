@@ -20,15 +20,15 @@ CREATE TABLE IF NOT EXISTS scripts (
     ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS websockets (
-  `connection_id` varchar(50) NOT NULL,
-  `user_id` varchar(50) NOT NULL,
-  `connection_status` varchar(50) NOT NULL,
-  `connection_time` date NOT NULL,
-  `ip_address` varchar(255) NOT NULL,
-  `endpoint` varchar(50) NOT NULL,
-  PRIMARY KEY (`connection_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE IF NOT EXISTS websockets (
+--   `connection_id` varchar(50) NOT NULL,
+--   `user_id` varchar(50) NOT NULL,
+--   `connection_status` varchar(50) NOT NULL,
+--   `connection_time` date NOT NULL,
+--   `ip_address` varchar(255) NOT NULL,
+--   `endpoint` varchar(50) NOT NULL,
+--   PRIMARY KEY (`connection_id`)
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 INSERT INTO `users` (`user_id`, `device_number`, `password`)

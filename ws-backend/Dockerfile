@@ -9,13 +9,12 @@ ENV APP /app
 RUN mkdir $APP
 WORKDIR $APP
 
-EXPOSE 5000
+EXPOSE 7000
 
 COPY requirements.txt .
-RUN pip install gunicorn
 RUN pip install -r requirements.txt
 
 COPY . .
 
-# CMD ["python", "-m", "flask", "--app", "main_app", "run", "--host=0.0.0.0"]
-CMD ["gunicorn", "-w", "2", "--bind", "0.0.0.0:5000", "wsgi:app"]
+CMD ["python", "app.py"]
+# CMD ["gunicorn", "-w", "2", "--bind", "0.0.0.0:5000", "wsgi:app"]

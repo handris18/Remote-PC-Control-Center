@@ -28,12 +28,18 @@ export class WorkspaceService {
     )
   }
 
-  fetchButtons() {
+  fetchButtons(): void {
     this.apiService.fetchAllScripts().subscribe(
       buttonList => {
         this.buttonsInner = buttonList;
         this.buttons$.next(cloneDeep(this.buttonsInner));
       }
+    );
+  }
+
+  executeScript(id: number): void {
+    this.apiService.executeScript(id).subscribe(
+      response => console.log(response)
     );
   }
 

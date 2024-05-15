@@ -88,7 +88,7 @@ namespace Control_Center
                     if (await server_comm.Send_to_Server(data, url))
                     {
                         MessageBox.Show($"Logged in as: {in_username}");
-                        executer.run_script();
+                        executer.run_script(data["device_number"]);
                     }
                     else
                     {

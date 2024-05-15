@@ -38,6 +38,7 @@ namespace Control_Center.Model
                     var content = new StringContent(jsonData, Encoding.UTF8, "application/json");
                     request.Content = content;
                     response = await httpClient.SendAsync(request);
+                    //var token = response.Content
                 }
 
                 if (response.IsSuccessStatusCode)

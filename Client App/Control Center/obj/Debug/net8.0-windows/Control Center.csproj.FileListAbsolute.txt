@@ -19,3 +19,27 @@ C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Remote PC 
 C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Remote PC Control Center\Control Center\obj\Debug\net8.0-windows\Control Center.pdb
 C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Remote PC Control Center\Control Center\obj\Debug\net8.0-windows\Control Center.genruntimeconfig.cache
 C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Remote PC Control Center\Control Center\obj\Debug\net8.0-windows\ref\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.exe
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.deps.json
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.runtimeconfig.json
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.pdb
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\MainWindow.g.cs
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\App.g.cs
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center_MarkupCompile.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center_MarkupCompile.lref
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\MainWindow.baml
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.g.resources
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.GeneratedMSBuildEditorConfig.editorconfig
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.AssemblyInfoInputs.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.AssemblyInfo.cs
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.CoreCompileInputs.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.sourcelink.json
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\refint\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.pdb
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.genruntimeconfig.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\ref\Control Center.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.AssemblyReference.cache
+D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control .04D9929E.Up2Date

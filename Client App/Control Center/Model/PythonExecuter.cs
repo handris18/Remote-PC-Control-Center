@@ -2,54 +2,49 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace Control_Center.Model
 {
-    internal class PythonExecuter
+    public class PythonExecuter
     {
-        private void run_cmd(string cmd, string args)
+        Process p;
+
+        public void run_script()
         {
-            ProcessStartInfo start = new ProcessStartInfo();
-            start.FileName = cmd;//cmd is full path to python.exe
-            start.Arguments = args;//args is path to .py file and any cmd line args
-            start.UseShellExecute = false;
-            start.RedirectStandardOutput = true;
-            using (Process process = Process.Start(start))
+            string filePath = AppDomain.CurrentDomain.BaseDirectory;
+            filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
+            Directory.SetCurrentDirectory(filePath);
+
+            p = new Process();
+            p.StartInfo = new ProcessStartInfo("CMD.exe")
             {
-                using (StreamReader reader = process.StandardOutput)
-                {
-                    string result = reader.ReadToEnd();
-                    Console.Write(result);
-                }
-            }
-        }
-
-        private Process run_script()
-        {
-
-            string filePath = AppDomain.CurrentDomain.BaseDirectory + @"\model\Client.py";
-
-            Process p = new Process();
-            p.StartInfo = new ProcessStartInfo(filePath)
-            {
+                //Arguments = "py model\\Client.py",
                 RedirectStandardOutput = true,
+                RedirectStandardInput = true,
                 UseShellExecute = false,
-                CreateNoWindow = true
+                CreateNoWindow = false
             };
             p.Start();
 
-            string output = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
-
-            return p;
+            p.StandardInput.WriteLine("py model\\Client.py");
         }
 
-        public void kill_script(Process p)
+        public void kill_script()
         {
-            p.Kill();
+            try {
+                if (p != null)
+                {
+                    p.Kill();
+                    foreach (var server in Process.GetProcessesByName("python"))
+                    {
+                        server.Kill();
+                    }
+                    p.Close();
+                }
+            } 
+            catch {
+            }
         }
     }
 }

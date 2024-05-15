@@ -27,9 +27,7 @@ namespace Control_Center.Model
             };
             p.Start();
 
-            string password = Microsoft.VisualBasic.Interaction.InputBox("Please enter your password", "Login", "", 0, 0);
-
-            p.StandardInput.WriteLine("py model\\Client.py " + password);
+            p.StandardInput.WriteLine("py model\\Client.py");
         }
 
         public void kill_script()

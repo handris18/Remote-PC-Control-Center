@@ -22,7 +22,7 @@ namespace Control_Center
             InitializeComponent();
         }
 
-        private void Register_Click(object sender, RoutedEventArgs e)
+        private async void Register_Click(object sender, RoutedEventArgs e)
         {
             var registerWindow = new RegisterWindow();
             if (registerWindow.ShowDialog() == true)
@@ -40,15 +40,15 @@ namespace Control_Center
                         return;
                     }
 
-                    var data = new
+                    var data = new Dictionary<string, string>
                     {
-                        device_number = File.ReadAllText("Persistence/UID.txt"),
-                        password = in_password
+                        { "device_number" , File.ReadAllLines("Persistence/UID.txt")[0] },
+                        { "password" , in_password }
                     };
+
                     var url = "http://localhost:5000/register";
-                    server_comm.Send_to_Server(data, url);
-                    
-                    if (server_comm.success)
+                                        
+                    if (await server_comm.Send_to_Server(data, url))
                     {
                         File.Create("Persistence/Registered.txt").Close();
                         MessageBox.Show($"Registered as: {in_username}");
@@ -61,15 +61,11 @@ namespace Control_Center
             }
             else
             {
-                // Login canceled
                 MessageBox.Show("Registration canceled");
             }
         }
 
-        private void Unregister_Click(object sender, RoutedEventArgs e)
-        { }
-
-        private void Connect_Click(object sender, RoutedEventArgs e)
+        private async void Connect_Click(object sender, RoutedEventArgs e)
         {
             string filePath = AppDomain.CurrentDomain.BaseDirectory;
             filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
@@ -82,15 +78,14 @@ namespace Control_Center
                     string in_username = loginWindow.Username;
                     string in_password = loginWindow.Password;
 
-                    var data = new
+                    var data = new Dictionary<string, string>
                     {
-                        device_number = File.ReadAllText("Persistence/UID.txt"),
-                        password = in_password
+                        { "device_number" , File.ReadAllLines("Persistence/UID.txt")[0] },
+                        { "password" , in_password }
                     };
                     var url = "http://localhost:5000/login";
-                    server_comm.Send_to_Server(data, url);
 
-                    if (server_comm.success)
+                    if (await server_comm.Send_to_Server(data, url))
                     {
                         MessageBox.Show($"Logged in as: {in_username}");
                         executer.run_script();

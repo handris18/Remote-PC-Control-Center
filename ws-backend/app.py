@@ -1,5 +1,5 @@
 import logging
-from flask import Flask, request, render_template
+from flask import Flask, request, jsonify
 from flask_socketio import SocketIO, emit
 from flask_socketio import ConnectionRefusedError
 
@@ -10,8 +10,8 @@ connected_clients = {}  # Dictionary to track connected clients
 
 @socketio.on('connect')
 def handle_connect(auth):
-    if (auth is None):
-        raise ConnectionRefusedError('unathorized!')
+    if auth is None:
+        raise ConnectionRefusedError('unauthorized!')
     else:
         username = auth['username']
         connected_clients[username] = request.sid
@@ -32,10 +32,23 @@ def send_message(data):
     
     # Send message to the specified recipient
     session_id = connected_clients.get(recipient_id, None)
-    if (session_id is None):
+    if session_id is None:
         emit('execute fail', {'message': 'User is not connected'})
     else:
         socketio.emit('execute', {'script_id': script_id}, to=session_id)
+
+@app.route('/execute', methods=['POST'])
+def execute():
+    data = request.get_json()
+    recipient_id = data['recipient_id']
+    script_id = data['script_id']
+    
+    session_id = connected_clients.get(recipient_id, None)
+    if session_id is None:
+        return jsonify({'status': 'fail', 'message': 'User is not connected'}), 400
+    else:
+        socketio.emit('execute', {'script_id': script_id}, to=session_id)
+        return jsonify({'status': 'success', 'message': 'Execution event emitted'}), 200
 
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=5000, debug=True, allow_unsafe_werkzeug=True)

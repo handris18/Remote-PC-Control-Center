@@ -69,8 +69,8 @@ export class APIService {
   }
 
   executeScript(id: number): Observable<ExecuteResponse> {
-    return this.httpClient.get<any>(
-      API_ENDPOINTS.fetchScript(id), this.httpOptions).pipe(
+    return this.httpClient.post<any>(
+      API_ENDPOINTS.executeScript(id), this.httpOptions).pipe(
         catchError(this.handleError<ExecuteResponse>('execute'))
       )
   }

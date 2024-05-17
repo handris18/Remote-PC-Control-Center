@@ -11,7 +11,7 @@ connected_clients = {}  # Dictionary to track connected clients
 @socketio.on('connect')
 def handle_connect(auth):
     if (auth is None):
-        raise ConnectionRefusedError('unathorized!')
+        raise ConnectionRefusedError('unauthorized!')
     else:
         username = auth['username']
         connected_clients[username] = request.sid

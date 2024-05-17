@@ -16,6 +16,13 @@ services:
     ports:
       - 8080:8080
 
+  ws-server:
+    build:
+      context: ws-backend
+    restart: always
+    ports:
+      - 7000:5000
+
   api:
     build:
       context: backend-api
@@ -23,6 +30,7 @@ services:
     ports:
       - 5000:5000
     depends_on:
+      - ws-server
       - mysql
 
   web-app:

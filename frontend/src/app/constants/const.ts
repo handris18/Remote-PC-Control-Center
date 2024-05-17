@@ -6,7 +6,8 @@ export const API_ENDPOINTS = {
     fetchScripts: API_URL + '/scripts/fetch',
     createScript: API_URL + '/scripts/create',
     fetchScript: (id: number) => `${API_URL}/scripts/${id}`,
-    updateScript: (id: number) => `${API_URL}/scripts/${id}/update`, 
+    updateScript: (id: number) => `${API_URL}/scripts/${id}/update`,
+    executeScript: (id: number) => `${API_URL}/scripts/${id}/execute`,
 }
 
 export const DEFAULT_SCRIPT_NAME = "Default name";

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, map, of, tap } from 'rxjs';
 
-import { CreateRequest, CreateResponse, LoginModel, LoginResponse, UpdateRequest, UpdateResponse } from '../interfaces/api-interfaces.interface';
+import { CreateRequest, CreateResponse, ExecuteResponse, LoginModel, LoginResponse, UpdateRequest, UpdateResponse } from '../interfaces/api-interfaces.interface';
 import { API_ENDPOINTS } from '../constants/const';
 import { ScriptButton, ScriptObject } from '../interfaces/script-button.interface';
 
@@ -65,6 +65,13 @@ export class APIService {
     return this.httpClient.put<UpdateResponse>(
       API_ENDPOINTS.updateScript(parseInt(id)), requestBody, this.httpOptions).pipe(
         catchError(this.handleError<UpdateResponse>('update'))
+      )
+  }
+
+  executeScript(id: number): Observable<ExecuteResponse> {
+    return this.httpClient.post<any>(
+      API_ENDPOINTS.executeScript(id), this.httpOptions).pipe(
+        catchError(this.handleError<ExecuteResponse>('execute'))
       )
   }
 

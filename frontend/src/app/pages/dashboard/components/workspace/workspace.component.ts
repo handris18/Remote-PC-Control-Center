@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { ScriptButton } from '../../../../interfaces/script-button.interface';
 import { WorkspaceService } from '../../../../services/workspace.service';
 import { SidebarService } from '../../../../services/sidebar.service';
+import { APIService } from '../../../../services/api.service';
 
 @Component({
   selector: 'app-workspace',
@@ -29,6 +30,6 @@ export class WorkspaceComponent implements OnInit {
 	}
 
   launchScript(scriptButton: ScriptButton) {
-    alert(`The script ${scriptButton.id} has been laucnhed`);
+    this.workspaceService.executeScript(parseInt(scriptButton.id));
   }
 }

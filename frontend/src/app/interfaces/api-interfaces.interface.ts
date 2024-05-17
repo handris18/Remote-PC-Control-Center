@@ -24,6 +24,10 @@ export interface UpdateResponse {
     message: string;
 }
 
+export interface ExecuteResponse {
+    message: string;
+}
+
 export class UpdateRequest {
     script_name: string = DEFAULT_SCRIPT_NAME;
     content: string = "";

@@ -1,0 +1,4 @@
+# Disable line ending conversion for specific files
+venv/Lib/site-packages/Flask_MySQLdb-2.0.0.dist-info/* -text
+venv/Lib/site-packages/flask_mysqldb/* -text
+venv/Lib/site-packages/mysqlclient-2.2.4.dist-info/* -text

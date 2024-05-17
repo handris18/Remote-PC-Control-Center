@@ -8,8 +8,13 @@ from flask_mysqldb import MySQL
 from datetime import datetime
 import json
 import sys
+from uuid import uuid4
 from io import StringIO
+import socketio
 
+WS_SERVER_URL = 'ws://ws-server:5000'
+DEFAULT_SCRIPT_FILL = '''print('Hello, World!')
+'''
 
 app = Flask(__name__)
 CORS(app)
@@ -99,7 +104,9 @@ def login():
 def create_script():
     data = request.json
     script_name = data.get('script_name')
-    content = data.get('content')
+    content = data.get('content', DEFAULT_SCRIPT_FILL)
+    if (content == ''):
+        content = DEFAULT_SCRIPT_FILL
     user_id = get_jwt_identity()
 
     if not script_name or content == None:
@@ -188,34 +195,23 @@ def execute_script(script_id):
     current_user = get_jwt_identity()
 
     cur = mysql.connection.cursor()
-    cur.execute("SELECT content FROM scripts WHERE script_id = %s AND user_id = %s", (script_id, current_user))
-    script_content_tuple = cur.fetchone()
+    cur.execute("SELECT scripts.script_id AS script_id, users.device_number AS device_id " +
+        "FROM scripts JOIN users on users.user_id = scripts.user_id " +
+        "WHERE scripts.script_id = %s AND scripts.user_id = %s", (script_id, current_user))
+    script_device_id_tuple = cur.fetchone()
     cur.close()
 
-    if script_content_tuple:
-        script_content = script_content_tuple[0]  # Accessing the first element of the tuple
-        # Execute the script
-        try:
-            # Capture standard output and error
-            sys.stdout = StringIO()
-            sys.stderr = StringIO()
-            exec(script_content)
-            output = sys.stdout.getvalue()
-            error = sys.stderr.getvalue()
-            # Restore sys.stdout and sys.stderr
-            sys.stdout = sys.__stdout__
-            sys.stderr = sys.__stderr__
-            # Check if there was any error during execution
-            if error:
-                return jsonify({'error': error}), 500
-            else:
-                return jsonify({'output': output}), 200
-        except Exception as e:
-            return jsonify({'error': f'Error executing script: {str(e)}'}), 500
+    if script_device_id_tuple:
+        admin_id = 'admin-' + str(uuid4())
+        with socketio.SimpleClient() as sio:
+            sio.connect(WS_SERVER_URL, auth={'username': admin_id})
+
+            device_number = script_device_id_tuple[1]
+            socket_payload = {'recipient_id': device_number, 'script_id': script_id}
+            sio.call('execute', data=socket_payload)
+        return jsonify({'message': 'The signal for execution was sent'}), 200
     else:
-        return jsonify({'error': 'Script not found'}), 404
-
-
+        return jsonify({'message': 'No script with such id for this user'}), 404
 
 if __name__ == '__main__':
     app.run(debug=True)

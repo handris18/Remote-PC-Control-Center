@@ -1,5 +1,6 @@
-services:
+version: '3.8'
 
+services:
   mysql:
     image: mysql:8.4.0
     restart: always
@@ -14,21 +15,21 @@ services:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - "8080:8080"
 
   ws-server:
     build:
       context: ws-backend
     restart: always
     ports:
-      - 7000:5000
+      - "7000:5000"
 
   api:
     build:
       context: backend-api
     restart: always
     ports:
-      - 5000:5000
+      - "5000:5000"
     depends_on:
       - ws-server
       - mysql
@@ -38,10 +39,13 @@ services:
       context: frontend
     restart: always
     ports:
-      - 4200:4200
+      - "4200:4200"
     depends_on:
       - api
       - mysql
+    volumes:
+      - ./frontend:/usr/src/app  # Bind mount your local directory to the container
+      - /usr/src/app/node_modules  # Ensure node_modules is not overwritten
 
 volumes:
   mysql_db:

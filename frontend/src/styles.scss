@@ -1,4 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
-/* Importing Bootstrap SCSS file. */
-@import 'bootstrap/scss/bootstrap';
+* {
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+// Custom styles for the navbar
+.navbar {
+  background-color: #512da8 !important;
+  padding: 1rem;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.navbar .btn-outline-success {
+  border-color: #ffffff;
+  color: #ffffff;
+  margin-right: 1rem;
+
+  &:hover {
+    background-color: #ffffff;
+    color: #512da8;
+  }
+}
+
+.navbar .btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+
+  &:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+  }
+}
+
+.navbar .text-white {
+  color: #ffffff !important;
+  margin-right: 1rem;
+}

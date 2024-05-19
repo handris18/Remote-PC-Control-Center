@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@angular/router": "^17.3.9",
+    "@ng-bootstrap/ng-bootstrap": "^16.0.0",
+    "bootstrap": "^5.3.3",
+    "tslib": "^2.6.2"
+  }
+}

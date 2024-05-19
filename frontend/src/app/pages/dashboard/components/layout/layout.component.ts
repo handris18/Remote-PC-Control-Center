@@ -8,6 +8,7 @@ import { WorkspaceService } from '../../../../services/workspace.service';
   templateUrl: './layout.component.html',
   // styleUrl: './layout.component.scss'
 })
+
 export class LayoutComponent {
 
   loggedUser: any;

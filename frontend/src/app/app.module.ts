@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
-import { LayoutComponent } from './pages/dashboard/components/layout/layout.component';
+import { LayoutComponent } from './pages/dashboard/components/layout/layout.component'; // Correct import path
 import { WorkspaceComponent } from './pages/dashboard/components/workspace/workspace.component';
 import { ScriptButtonComponent } from './pages/dashboard/components/workspace/components/script-button/script-button.component';
 import { EditSidebarComponent } from './pages/dashboard/components/workspace/components/edit-sidebar/edit-sidebar.component';

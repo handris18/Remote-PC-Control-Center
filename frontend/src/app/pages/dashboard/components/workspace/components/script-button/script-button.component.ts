@@ -5,7 +5,7 @@ import { ScriptButton } from '../../../../../../interfaces/script-button.interfa
 @Component({
   selector: 'app-script-button',
   templateUrl: './script-button.component.html',
-  // styleUrl: './script-button.component.scss',
+  styleUrl: './script-button.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ScriptButtonComponent {

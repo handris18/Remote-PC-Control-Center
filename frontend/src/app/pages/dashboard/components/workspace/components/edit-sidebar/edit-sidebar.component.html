@@ -1,18 +1,14 @@
-<div class="offcanvas-header">
-  <h5 class="offcanvas-title">Edit script</h5>
-  <button
-    type="button"
-    class="btn-close text-reset"
-    aria-label="Close"
-    (click)="activeOffcanvas.dismiss('Cross click')"
-  ></button>
+<div class="modal-header">
+  <h5 class="modal-title">Edit script</h5>
+  <button type="button" class="btn-close text-reset" aria-label="Close" (click)="activeOffcanvas.dismiss('Cross click')"></button>
 </div>
-<div class="offcanvas-body">
-  @if (scriptButton) {
-    <div>Name: {{ scriptButton.name }}</div>
-  } @else {
-    <div>Name unknown</div>
-  }
-  <textarea [(ngModel)]="scriptText"></textarea>
-  <button (click)="saveScript()">Save text</button>
+<div class="modal-body">
+  <ng-container *ngIf="scriptButton; else unknownName">
+    <div class="name-display">Name: {{ scriptButton.name }}</div>
+  </ng-container>
+  <ng-template #unknownName>
+    <div class="name-display">Name unknown</div>
+  </ng-template>
+  <textarea class="form-control" [(ngModel)]="scriptText"></textarea>
+  <button class="save-button mt-3" (click)="saveScript()">Save text</button>
 </div>

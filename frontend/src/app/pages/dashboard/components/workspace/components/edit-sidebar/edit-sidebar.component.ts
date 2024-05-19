@@ -8,8 +8,8 @@ import { SidebarService } from '../../../../../../services/sidebar.service';
 @Component({
   selector: 'app-edit-sidebar',
   templateUrl: './edit-sidebar.component.html',
-  // styleUrl: './edit-sidebar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  styleUrls: ['./edit-sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditSidebarComponent {
 
@@ -36,7 +36,7 @@ export class EditSidebarComponent {
       .subscribe(scrTxt => {
         this.scriptText = scrTxt;
         this.changeDetectorRef.detectChanges();
-      });;
+      });
   }
 
   ngOnDestroy(): void {

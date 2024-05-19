@@ -1,3 +1,4 @@
+import socketio
 from flask import Flask
 import os
 import subprocess
@@ -7,67 +8,48 @@ from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import sys
 from pathlib import Path
-import socketio
+import requests
+import json
 
 #app = Flask(__name__)
 sio = socketio.Client()
-'''app.config['MYSQL_HOST'] = 'localhost'
-app.config['MYSQL_PORT'] = 1080
-app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = ''
-app.config['MYSQL_DB'] = 'remote_pc_controller'
-app.config['JWT_SECRET_KEY'] = 'Client'  
-app.config['JWT_BLACKLIST_ENABLED'] = True
-app.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access']
-jwt = JWTManager(app)'''
 
-save_path = os.path.dirname(os.path.abspath(__file__)) + 'Script.py'
-url = 'ws://localhost:7000'
-api_url = 'http://localhost:5000'
-successful = False
+save_path = os.path.dirname(os.path.abspath(__file__))
+url = 'ws://localhost:7000/'
+api_url = 'http://localhost:5000/'
 script_name = ''
 UID = sys.argv[1]
 password = ''
+token = sys.argv[2]
 auth_data = {"username" : UID}
 
-'''@app.route('/')
-def Is_Online():
-    return 'Online!'
-
-@app.route('/run_script')
-def process_message():
-    data = request.json
-    if 'run script' == data['action']:
-        script_name = data['script_id']
-        script_url = url + 'scripts/' + script_id
-        download_script(script_url, save_path)
-        if (successful):
-            subprocess.run(['python', save_path])
-            return 200
-        else:
-            return {'error': 'Script not found'}, 400'''
-
-def download_script(url, save_path):
-    print("runs", file=sys.stderr);
-    response = requests.get(url)  #need jwt token header      Authorization: Bearer {jwt_token}
+def download_script(url, path):
+    print("downloads", file=sys.stderr);
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    response = requests.get(url, headers=headers)
     if response.status_code == 200:
-        with open(save_path, 'w') as f:
-            f.write(response.content)
-        successful = True
+        with open(path, 'w') as f:
+            f.write(json.loads(response.text)[2])
+        return True
     else:
-        successful = False
+        return False
 
 @sio.on('execute')
 def handle_message(message):
     print("executes", file=sys.stderr);
     script_id = message['script_id']
-    script_url = api_url + 'scripts/' + script_id
-    download_script(script_url, save_path)
-    if (successful):
-        subprocess.run(['python', save_path])
+    script_url = api_url + 'scripts/' + str(script_id)
+    if (download_script(script_url, save_path + '/Script.py')):
+        os.chdir(save_path)
+        cmd = subprocess.Popen(('cmd /k python Script.py'), creationflags=subprocess.CREATE_NEW_CONSOLE)
+        print("Ran?")
         return 200
     else:
         return {'error': 'Script not found'}, 400
 
 if __name__ == '__main__':
     sio.connect(url, auth=auth_data)
+    while (True):
+        continue

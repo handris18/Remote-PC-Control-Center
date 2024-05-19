@@ -43,3 +43,27 @@ D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\ob
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.AssemblyReference.cache
 D:\cuccok\egyetemmegstb\2023_24_2\Haladó szofttech\Client App\Control Center\obj\Debug\net8.0-windows\Control .04D9929E.Up2Date
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.exe
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.deps.json
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.runtimeconfig.json
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.dll
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Control Center.pdb
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\bin\Debug\net8.0-windows\Newtonsoft.Json.dll
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.AssemblyReference.cache
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\MainWindow.g.cs
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\App.g.cs
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center_MarkupCompile.cache
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center_MarkupCompile.lref
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\MainWindow.baml
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.g.resources
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.AssemblyInfoInputs.cache
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.AssemblyInfo.cs
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.csproj.CoreCompileInputs.cache
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.sourcelink.json
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control .04D9929E.Up2Date
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.dll
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\refint\Control Center.dll
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.pdb
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\Control Center.genruntimeconfig.cache
+C:\Users\handr\OneDrive\Asztali gép\suli\Haladó Szofttech\Remote PC\Client App\Control Center\obj\Debug\net8.0-windows\ref\Control Center.dll

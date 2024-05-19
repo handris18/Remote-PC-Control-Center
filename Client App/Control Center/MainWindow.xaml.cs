@@ -48,7 +48,7 @@ namespace Control_Center
 
                     var url = "http://localhost:5000/register";
                                         
-                    if (await server_comm.Send_to_Server(data, url))
+                    if (await server_comm.Reg_to_Server(data, url))
                     {
                         File.Create("Persistence/Registered.txt").Close();
                         MessageBox.Show($"Registered as: {in_username}");
@@ -85,10 +85,12 @@ namespace Control_Center
                     };
                     var url = "http://localhost:5000/login";
 
-                    if (await server_comm.Send_to_Server(data, url))
+                    var comm = await server_comm.Login_to_Server(data, url);
+
+                    if (comm.Item1)
                     {
                         MessageBox.Show($"Logged in as: {in_username}");
-                        executer.run_script(data["device_number"]);
+                        executer.run_script(data["device_number"], comm.Item2);
                     }
                     else
                     {

@@ -10,7 +10,7 @@ namespace Control_Center.Model
     {
         Process p;
 
-        public void run_script(string UID)
+        public void run_script(string UID, string token)
         {
             string filePath = AppDomain.CurrentDomain.BaseDirectory;
             filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
@@ -27,7 +27,7 @@ namespace Control_Center.Model
             };
             p.Start();
 
-            p.StandardInput.WriteLine("py model\\Client.py " + UID);
+            p.StandardInput.WriteLine("py model\\Client.py " + UID + " " + token);
         }
 
         public void kill_script()

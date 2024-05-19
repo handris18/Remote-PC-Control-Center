@@ -44,7 +44,6 @@ def handle_message(message):
     if (download_script(script_url, save_path + '/Script.py')):
         os.chdir(save_path)
         cmd = subprocess.Popen(('cmd /k python Script.py'), creationflags=subprocess.CREATE_NEW_CONSOLE)
-        print("Ran?")
         return 200
     else:
         return {'error': 'Script not found'}, 400

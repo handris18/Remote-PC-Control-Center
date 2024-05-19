@@ -37,6 +37,7 @@ namespace Control_Center
                     if (File.Exists("Persistence/Registered.txt") )
                     {
                         MessageBox.Show("Device already registered!");
+                        register.IsEnabled = false;
                         return;
                     }
 
@@ -52,6 +53,7 @@ namespace Control_Center
                     {
                         File.Create("Persistence/Registered.txt").Close();
                         MessageBox.Show($"Registered as: {in_username}");
+                        register.IsEnabled = false;
                     }
                     else
                     {
@@ -91,6 +93,7 @@ namespace Control_Center
                     {
                         MessageBox.Show($"Logged in as: {in_username}");
                         executer.run_script(data["device_number"], comm.Item2);
+                        connect.IsEnabled = false;
                     }
                     else
                     {
@@ -109,6 +112,7 @@ namespace Control_Center
         private void Disconnect_Click(object sender, RoutedEventArgs e)
         {
             executer.kill_script();
+            connect.IsEnabled = true;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

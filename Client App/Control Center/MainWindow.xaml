@@ -8,12 +8,10 @@
         Title="Control Center Client" Height="450" Width="800">
     <Grid>
         <Menu Height="30" VerticalAlignment="Top">
-            <MenuItem Header="Actions" Height="30">
-                <MenuItem Header="Register device" Click="Register_Click"></MenuItem>
-                <MenuItem Header="Connect" Click="Connect_Click"></MenuItem>
-                <MenuItem Header="Disconnect" Click="Disconnect_Click"></MenuItem>
-                <MenuItem Header="Exit" Click="Exit_Click"></MenuItem>
-            </MenuItem>
+            <MenuItem Height="30" Header="Register device" Click="Register_Click" x:Name="register"></MenuItem>
+            <MenuItem Height="30" Header="Connect" Click="Connect_Click" x:Name="connect"></MenuItem>
+            <MenuItem Height="30" Header="Disconnect" Click="Disconnect_Click" x:Name="disconnect"></MenuItem>
+            <MenuItem Height="30" Header="Exit" Click="Exit_Click" x:Name="exit"></MenuItem>
         </Menu>
         <Ellipse HorizontalAlignment="Left" Height="16" Margin="26,71,0,0" Stroke="Black" Fill="Red" VerticalAlignment="Top" Width="16"/>
         <Label Content="Connection" HorizontalAlignment="Left" Margin="47,66,0,0" VerticalAlignment="Top"/>

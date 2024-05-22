@@ -1,0 +1,86 @@
+/* edit-sidebar.component.scss */
+
+:host {
+    height: 100%;
+}
+
+.sidebar-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+// Modal header
+.modal-header {
+    background-color: #512da8;
+    color: #fff;
+    border-bottom: none;
+    display: flex;
+    justify-content: center; // Centering the title horizontally
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  // Modal title
+  .modal-title {
+    font-weight: bold;
+    flex: 1; // Allow the title to take up available space
+    text-align: center; // Center the title text
+  }
+  
+  // Close button
+  .btn-close {
+    position: absolute;
+    right: 20px;
+  }
+  
+  // Modal body
+  .modal-body {
+    background-color: #c9d6ff;
+    background: linear-gradient(to right, #e2e2e2, #c9d6ff);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+    align-items: center; // Centering the content horizontally
+    padding: 30px;
+    border-radius: 8px; // Optional: If you want rounded corners
+  }
+  
+  // Name display
+  .name-display {
+    margin-bottom: 20px;
+    text-align: center; // Center the name display text
+    width: 100%;
+    font-weight: bold;
+  }
+  
+  // Textarea
+  textarea {
+    width: 100%; // Make the textarea larger
+    flex: 1;
+    height: 100%; // Increase the height of the textarea
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 20px;
+    resize: none; // Disable resizing
+  }
+  
+  // Save button
+  .save-button {
+    background-color: #512da8;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  // Save button hover effect
+  .save-button:hover {
+    background-color: #9d75f4;
+  }

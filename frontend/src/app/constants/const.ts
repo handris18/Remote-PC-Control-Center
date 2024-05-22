@@ -1,5 +1,7 @@
-export const API_HOST = 'localhost:4200';
-export const API_URL = 'http://' + API_HOST + '/api';
+import { environment } from "../../environments/environment";
+
+export const API_HOST = environment.apiURL;
+export const API_URL = 'http://' + API_HOST;
 
 export const API_ENDPOINTS = {
     login: API_URL + '/login',

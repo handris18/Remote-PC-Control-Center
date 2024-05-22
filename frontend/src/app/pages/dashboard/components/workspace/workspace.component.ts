@@ -4,12 +4,11 @@ import { Observable, of } from 'rxjs';
 import { ScriptButton } from '../../../../interfaces/script-button.interface';
 import { WorkspaceService } from '../../../../services/workspace.service';
 import { SidebarService } from '../../../../services/sidebar.service';
-import { APIService } from '../../../../services/api.service';
 
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  // styleUrl: './workspace.component.scss'
+  styleUrl: './workspace.component.scss'
 })
 export class WorkspaceComponent implements OnInit {
 

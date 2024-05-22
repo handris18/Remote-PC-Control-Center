@@ -1,2 +1,7 @@
 ./node_modules
 ./.vscode
+Dockerfile
+.editorconfig
+package-lock.json
+DevDockerfile
+.dockerignore

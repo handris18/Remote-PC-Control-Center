@@ -1,0 +1,53 @@
+services:
+
+  mysql:
+    image: mysql:8.4.0
+    restart: always
+    command: --init-file /data/application/init.sql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - mysql_db:/var/lib/mysql
+      - ./docker/init.sql:/data/application/init.sql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  ws-server:
+    build:
+      context: ws-backend
+    restart: always
+    ports:
+      - 7000:5000
+
+  api:
+    build:
+      context: backend-api
+      dockerfile: DevDockerfile
+    restart: always
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend-api:/app
+    depends_on:
+      - ws-server
+      - mysql
+
+  web-app:
+    build:
+      context: frontend
+      dockerfile: DevDockerfile
+    restart: always
+    ports:
+      - 4200:4200
+    volumes:
+      - ./frontend/src:/web-app/src
+    depends_on:
+      - api
+      - mysql
+
+volumes:
+  mysql_db:

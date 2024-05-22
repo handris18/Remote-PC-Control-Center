@@ -1,0 +1,62 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+  // Container for each script block
+  .script-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #000; // Black border
+    border-radius: 8px; // Rounded corners
+    padding: 20px; // Padding inside the rectangle
+    margin: 20px; // Margin between script blocks
+    background-color: #ffffff; // White background color
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Shadow for 3D effect
+  }
+  
+  // Script name styles
+  .script-name {
+    font-size: 1.2rem; // Font size for the script name
+    font-weight: 600; // Font weight for the script name
+    margin-bottom: 10px; // Space between name and buttons
+  }
+  
+  // Button group styles
+  .button-group {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  // Common styles for buttons
+  .button {
+    border: 2px solid #000; // Black border
+    padding: 10px 20px; // Increased padding for buttons
+    cursor: pointer;
+    border-radius: 8px; // Rounded corners
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px; // Margin between buttons
+    font-size: 1rem; // Increased font size
+  }
+  
+  // Launch button styles
+  .launch-button {
+    background-color: #ffa600; // Background color for launch button
+    color: #ffffff; // Text color for launch button
+  
+    &:hover {
+      background-color: #e59500; // Hover background color
+    }
+  }
+  
+  // Edit button styles
+  .edit-button {
+    background-color: #58508d; // Background color for edit button
+    color: #ffffff; // Text color for edit button
+  
+    &:hover {
+      background-color: #474169; // Hover background color
+    }
+  }

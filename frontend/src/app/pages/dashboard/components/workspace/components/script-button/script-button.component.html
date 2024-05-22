@@ -1,9 +1,7 @@
-<div>
-    <p>{{ scriptButtonData.name }}</p>
-    <button (click)="launchScript()">
-        Launch script
-    </button>
-    <button (click)="editScript()">
-        Edit script
-    </button>
-</div>
+<div class="script-block">
+    <p class="script-name">{{ scriptButtonData.name }}</p>
+    <div class="button-group">
+      <button class="launch-button button" (click)="launchScript()">Launch script</button>
+      <button class="edit-button button" (click)="editScript()">Edit script</button>
+    </div>
+  </div>

@@ -21,7 +21,7 @@ export class SidebarService {
   openSidebarForScript(scriptButton: ScriptButton) {
     const offcanvasRef = this.offcanvasService.open(
       EditSidebarComponent,
-      { position: 'end' });
+      { position: 'end', panelClass: "w-50" });
 
     offcanvasRef.shown.subscribe(_ => {
       this.currentScriptButton$.next(scriptButton);

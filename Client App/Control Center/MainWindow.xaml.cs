@@ -63,6 +63,7 @@ namespace Control_Center
                         File.Create("Persistence/Registered.txt").Close();
                         MessageBox.Show($"Registered as: {username}");
                         register.IsEnabled = false;
+                        connect.IsEnabled = true;
                     }
                     else
                     {

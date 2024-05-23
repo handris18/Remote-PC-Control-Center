@@ -103,9 +103,9 @@ namespace Control_Center.Model
 
             public RegisterWindow(string UID)
             {
-                InitializeComponents();
                 txtUsername = new TextBlock();
                 txtUsername.Text = UID;
+                InitializeComponents();
             }
 
             private void InitializeComponents()

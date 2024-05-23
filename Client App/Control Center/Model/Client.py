@@ -43,7 +43,7 @@ def handle_message(message):
     script_url = api_url + 'scripts/' + str(script_id)
     if (download_script(script_url, save_path + '/Script.py')):
         os.chdir(save_path)
-        cmd = subprocess.Popen(('cmd /k python Script.py'), creationflags=subprocess.CREATE_NEW_CONSOLE)
+        cmd = subprocess.Popen(('cmd /k py Script.py'), creationflags=subprocess.CREATE_NEW_CONSOLE)
         return 200
     else:
         return {'error': 'Script not found'}, 400

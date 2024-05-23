@@ -9,15 +9,17 @@ namespace Control_Center.Model
     {
         public class LoginWindow : Window
         {
-            private TextBox txtUsername;
+            private TextBlock txtUsername;
             private PasswordBox txtPassword;
 
             public string Username { get; private set; }
             public string Password { get; private set; }
 
-            public LoginWindow()
+            public LoginWindow(string UID)
             {
-                InitializeComponents();
+                txtUsername = new TextBlock();
+                txtUsername.Text = UID;
+                InitializeComponents(); 
             }
 
             private void InitializeComponents()
@@ -46,7 +48,6 @@ namespace Control_Center.Model
                 lblUsername.Text = "Username:";
                 Grid.SetRow(lblUsername, 0);
 
-                txtUsername = new TextBox();
                 Grid.SetRow(txtUsername, 1);
 
                 TextBlock lblPassword = new TextBlock();
@@ -78,8 +79,7 @@ namespace Control_Center.Model
 
             private void btnLogin_Click(object sender, RoutedEventArgs e)
             {
-                // Get the entered username and password
-                Username = txtUsername.Text;
+                // Get the entered password
                 Password = txtPassword.Password;
 
                 // Close the dialog box
@@ -95,15 +95,17 @@ namespace Control_Center.Model
 
         public class RegisterWindow : Window
         {
-            private TextBox txtUsername;
+            private TextBlock txtUsername;
             private PasswordBox txtPassword;
 
             public string Username { get; private set; }
             public string Password { get; private set; }
 
-            public RegisterWindow()
+            public RegisterWindow(string UID)
             {
                 InitializeComponents();
+                txtUsername = new TextBlock();
+                txtUsername.Text = UID;
             }
 
             private void InitializeComponents()
@@ -133,7 +135,6 @@ namespace Control_Center.Model
                 lblUsername.Text = "Username:";
                 Grid.SetRow(lblUsername, 0);
 
-                txtUsername = new TextBox();
                 Grid.SetRow(txtUsername, 1);
 
                 TextBlock lblPassword = new TextBlock();
@@ -165,8 +166,7 @@ namespace Control_Center.Model
 
             private void btnRegister_Click(object sender, RoutedEventArgs e)
             {
-                // Get the entered username and password
-                Username = txtUsername.Text;
+                // Get the entered password
                 Password = txtPassword.Password;
 
                 // Close the dialog box

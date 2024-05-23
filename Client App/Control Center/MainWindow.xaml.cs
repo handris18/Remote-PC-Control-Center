@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Media;
 using Control_Center.Model;
 using Control_Center.Model.LoginPopup;
 
@@ -14,22 +15,30 @@ namespace Control_Center
     {
         private PythonExecuter executer;
         private Server_comm server_comm;
+        private string username;
 
         public MainWindow()
         {
             executer = new PythonExecuter();
             server_comm = new Server_comm();
+            string filePath = AppDomain.CurrentDomain.BaseDirectory;
+            filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
+            Directory.SetCurrentDirectory(filePath);
+            username = File.ReadAllLines("Persistence/UID.txt")[0];
             InitializeComponent();
+            if (!File.Exists("Persistence/Registered.txt"))
+            {
+                connect.IsEnabled = false;
+            }
         }
 
         private async void Register_Click(object sender, RoutedEventArgs e)
         {
-            var registerWindow = new RegisterWindow();
+            var registerWindow = new RegisterWindow(username);
             if (registerWindow.ShowDialog() == true)
             {
-                string in_username = registerWindow.Username;
                 string in_password = registerWindow.Password;
-                if (in_password != "" && in_username != "")
+                if (in_password != "" && username != "")
                 {
                     string filePath = AppDomain.CurrentDomain.BaseDirectory;
                     filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
@@ -43,7 +52,7 @@ namespace Control_Center
 
                     var data = new Dictionary<string, string>
                     {
-                        { "device_number" , File.ReadAllLines("Persistence/UID.txt")[0] },
+                        { "device_number" , username },
                         { "password" , in_password }
                     };
 
@@ -52,7 +61,7 @@ namespace Control_Center
                     if (await server_comm.Reg_to_Server(data, url))
                     {
                         File.Create("Persistence/Registered.txt").Close();
-                        MessageBox.Show($"Registered as: {in_username}");
+                        MessageBox.Show($"Registered as: {username}");
                         register.IsEnabled = false;
                     }
                     else
@@ -72,12 +81,11 @@ namespace Control_Center
             string filePath = AppDomain.CurrentDomain.BaseDirectory;
             filePath = filePath.Replace("\\bin\\Debug\\net8.0-windows", "");
             Directory.SetCurrentDirectory(filePath);
-            var loginWindow = new LoginWindow();
+            var loginWindow = new LoginWindow(username);
             if (loginWindow.ShowDialog() == true)
             {
                 if (File.Exists("Persistence/Registered.txt"))
                 {
-                    string in_username = loginWindow.Username;
                     string in_password = loginWindow.Password;
 
                     var data = new Dictionary<string, string>
@@ -91,9 +99,10 @@ namespace Control_Center
 
                     if (comm.Item1)
                     {
-                        MessageBox.Show($"Logged in as: {in_username}");
+                        MessageBox.Show($"Logged in as: {username}");
                         executer.run_script(data["device_number"], comm.Item2);
                         connect.IsEnabled = false;
+                        Connected.Fill = Brushes.Green;
                     }
                     else
                     {
@@ -113,6 +122,7 @@ namespace Control_Center
         {
             executer.kill_script();
             connect.IsEnabled = true;
+            Connected.Fill = Brushes.Red;
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)

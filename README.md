@@ -21,7 +21,9 @@ After that, the application should be running (it takes some time to initialize 
 
 ### Running the client app
 
-<h1>TODO!!</h1>
+Have 3.0 or later version of Python installed.
+
+The client application executable can be run on windows 10 and up.
 
 ## User manual
 
@@ -29,7 +31,11 @@ After that, the application should be running (it takes some time to initialize 
 
 To obtain login credentials for the web application interface, firstly, you should register your device via the instance of client application. Follow these steps to achieve such result:
 
-<h1>TODO!!</h1>
+- Open the client application via the executable, this generates a unique ID on the first launch.
+- Click Register Device. Here you can see your unique ID (this should be saved, but it can also be found in the Persistence folder in a file named UID.txt).
+- Enter the desired password in the registration field. Make sure to remember this password!
+- Click "register" and if the server connection is good a confirmation of success will appear. Press "Ok".
+- Your device is registered!
 
 ### 2. Using web interface to manage scripts
 
@@ -43,4 +49,9 @@ Once you have logged in with the provided credentials, the script managing dashb
 
 For the **"Launch script"** button to actually execute the script on a remote device, the following steps need to be performed using the client application on the said device in advance:
 
-<h1>TODO!!</h1>
+- Open the client application via the executable.
+- If you haven't registered your device already, follow the steps in point 1!
+- Press the "connect" button, and enter the same password you did during registration.
+- If connection with the server is stable, you'll receive a confirmation of success. Press "Ok".
+- The client will connect to the server via the cmd that opens up. Don't manually close this cmd, use the "Disconnect" button to close the connection!
+- Your client is ready to reveive and run scripts!
